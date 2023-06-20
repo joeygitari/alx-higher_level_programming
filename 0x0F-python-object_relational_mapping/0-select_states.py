@@ -1,18 +1,21 @@
 #!/usr/bin/python3
-""" Script to connect to MySQL server on localhost at port 3306
-"""
+
 import MySQLdb
-import sys
+from sys import argv
 
-
+'''
+a script that lists all states
+from the database
+'''
 if __name__ == "__main__":
-    user_name, password, db_name = sys.argv[1:]
-    conn = MySQLdb.connect(host='localhost', port=3306, user=user_name,
-                           passwd=password, db=db_name, charset="utf8")
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-    data = cur.fetchall()
-    for row in data:
-        print(row)
-    cur.close()
-    conn.close()
+    con = MySQLdb.connect(
+        host="localhost", port=3306, user=argv[1],
+        password=argv[2], database=argv[3])
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+    db = cursor.fetchall()
+    for i in db:
+        print(i)
+    cursor.close()
+    db.close()
+
