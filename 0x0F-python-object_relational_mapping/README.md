@@ -1,3 +1,1 @@
-# Python Object Relational Programming 
-## ALX
-
+# Object relational mapping
